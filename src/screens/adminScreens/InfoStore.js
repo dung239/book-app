@@ -7,45 +7,74 @@ import {
   FlatList,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
-import {COLORS, FONTS} from '../../assets';
-import FormInput from '../components/FormInput';
-import FormButton from '../components/FormButton';
+import {COLORS, FONTS} from '../../../assets';
+import FormInput from '../../components/FormInput';
+import FormButton from '../../components/FormButton';
 import auth from '@react-native-firebase/auth';
-import db from '../firebase/firebase';
+import db from '../../firebase/firebase';
+import LineDivider from '../../components/LineDivider';
 
 export default function InfoStore(props) {
   const [phone, setPhone] = useState('');
-  const [namestore, setNamestore] = useState('');
+  const [name, setName] = useState('');
   const [address, setAddress] = useState('');
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [info, setInfo] = useState([]);
 
   const handleSubmit = () => {
+    const a = info.map(item => {
+      return item.key;
+    });
+    const doc = a[0];
+    const b = info.map(item => {
+      return item.email;
+    });
+    const email = b[0];
     const uid = auth().currentUser.uid;
-    db.collection('User').doc(uid).update({
-      idstore: uid,
-      namestore: namestore,
+
+    db.collection('User').doc(doc).update({
+      name: name,
       phone: phone,
       address: address,
+      role: "admin",
+      email: email,
+      idUser: uid
     });
     setIsModalVisible(!isModalVisible);
   };
 
   const handleUpdate = () => {
+    const a = info.map(item => {
+      return item.name;
+    });
+    const name1 = a[0];
+    const b = info.map(item => {
+      return item.phone;
+    });
+    const phone1 = b[0];
+    const c = info.map(item => {
+      return item.address;
+    });
+    const address1 = c[0];
     setIsModalVisible(!isModalVisible);
+    setAddress(address1);
+    setPhone(phone1)
+    setName(name1)
     console.log(info);
   };
 
   const getInfo = async () => {
     await db
       .collection('User')
-      .doc(auth().currentUser.uid)
+      .where('idUser', '==', auth().currentUser.uid)
       .get()
-      .then(documentSnapshot => {
+      .then(querySnapshot => {
         const infos = [];
-        infos.push({
-          ...documentSnapshot.data(),
-          key: documentSnapshot.id,
+        querySnapshot.forEach(documentSnapshot => {
+          infos.push({
+            ...documentSnapshot.data(),
+            key: documentSnapshot.id,
+          });
         });
         setInfo(infos);
       });
@@ -56,15 +85,26 @@ export default function InfoStore(props) {
   });
 
   return (
-    <View style={{margin: 20, flex: 1, alignItems: 'center'}}>
+    <View style={{margin: 10, flex: 1}}>
       <View>
         <View>
           {info.map(item => {
             return (
               <View key={item.key}>
-                <Text style={{margin: 20, ...FONTS.body2}}>Tên cửa hàng: {item.namestore}</Text>
-                <Text style={{margin: 20, ...FONTS.body2}}>Địa chỉ: {item.address}</Text>
-                <Text style={{margin: 20, ...FONTS.body2}}>Số điện thoại: {item.phone}</Text>
+                <Text style={{margin: 20, ...FONTS.body2}}>
+                  Tên cửa hàng: {item.name}
+                </Text>
+                <LineDivider/>
+                {/* <Text style={{margin: 20, ...FONTS.body2}}>
+                  Email: {item.email}
+                </Text> */}
+                <Text style={{margin: 20, ...FONTS.body2}}>
+                  Địa chỉ: {item.address}
+                </Text>
+                <LineDivider/>
+                <Text style={{margin: 20, ...FONTS.body2}}>
+                  Số điện thoại: {item.phone}
+                </Text>
               </View>
             );
           })}
@@ -74,7 +114,7 @@ export default function InfoStore(props) {
         <FormButton
           labelText="Cập nhật"
           handleOnPress={handleUpdate}
-          style={{width: '50%'}}
+          style={{width: '50%', margin: 20}}
         />
       </View>
       {/* <KeyboardAvoidingView
@@ -90,7 +130,7 @@ export default function InfoStore(props) {
           transparent={true}>
           <View
             style={{
-              margin: 50,
+              margin: 40,
               // marginBottom: 200,
               flex: 1,
               alignSelf: 'center',
@@ -113,8 +153,8 @@ export default function InfoStore(props) {
             <FormInput
               labelText="Store name"
               placeholderText="Enter your store name"
-              onChangeText={value => setNamestore(value)}
-              value={namestore}
+              onChangeText={value => setName(value)}
+              value={name}
             />
 
             <FormInput

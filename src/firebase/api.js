@@ -2,6 +2,7 @@ import {Alert} from 'react-native';
 import auth from '@react-native-firebase/auth';
 import db from './firebase';
 
+// chức năng login 
 export const login = async (email, password) => {
   try {
     await auth()
@@ -9,7 +10,7 @@ export const login = async (email, password) => {
       .then(currentUser => {
         const user = currentUser.user;
         console.log(user.uid);
-      });
+      })
   } catch (e) {
     Alert.alert('Cảnh báo', 'Sai tài khoản hoặc mật khẩu.', [
       {text: 'Đồng ý', onPress: () => console.log('OK Pressed')},
@@ -17,7 +18,7 @@ export const login = async (email, password) => {
   }
 };
 
-export const register = async (email, password, name, phone, namestore) => {
+export const register = async (email, password, name, phone) => {
   try {
     await auth()
       .createUserWithEmailAndPassword(email, password)
@@ -26,14 +27,10 @@ export const register = async (email, password, name, phone, namestore) => {
           email: email,
           name: name,
           phone: phone,
-          namestore: namestore,
-          idStore: auth().currentUser.uid
+          idUser: auth().currentUser.uid,
+          role: 'user',
         });
       });
-    Alert.alert('Đăng ký thành công', 'Vui lòng trở lại trang đăng nhập.', [
-      {text: 'Đồng ý', onPress: () => navigation.navigate('Login')},
-    ]);
-    console.log('Đăng ký với', user.email);
   } catch (e) {
     Alert.alert('Đăng ký thất bại', '', [
       {text: 'Đồng ý', onPress: () => console.log('error')},

@@ -1,16 +1,14 @@
 import { View, Text, Settings, Image } from 'react-native'
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import Invoice from '../screens/Invoice'
-import Home from '../screens/Home'
-import Search from '../screens/Statistical'
-import Setting from '../screens/Setting'
 import { COLORS, icons } from '../../assets'
 import SettingNavigator from './SettingNavigator'
-import Statistical from '../screens/Statistical'
 import StatisticalNavigator from './StatisticalNavigator'
+import HomeNavigator from './HomeNavigator'
+import Category from '../screens/userScreens/Category'
+import CategoryAdmin from '../screens/adminScreens/CategoryAdmin'
 
-export default function MainNavigator() {
+export default function MainAdminNavigator() {
     const Tab = createBottomTabNavigator()
 
   return (
@@ -33,9 +31,9 @@ export default function MainNavigator() {
                                     }}
                                 />
                             )
-                        case "Hóa đơn":
+                        case "Danh mục":
                             return (
-                                <Image source={icons.invoice_icon}
+                                <Image source={icons.category_icon}
                                     resizeMode="contain"
                                     style={{
                                         tintColor: tintColor,
@@ -74,12 +72,12 @@ export default function MainNavigator() {
         >
             <Tab.Screen
                 name="Trang chủ"
-                component={Home}
+                component={HomeNavigator}
 
             />
             <Tab.Screen
-                name="Hóa đơn"
-                component={Invoice}
+                name="Danh mục"
+                component={CategoryAdmin}
             />
             <Tab.Screen
                 name="Thống kê"

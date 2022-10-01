@@ -1,29 +1,13 @@
 import {View, Text, TouchableOpacity} from 'react-native';
 import React from 'react';
-import {COLORS, FONTS, SIZES} from '../../assets';
+import {COLORS, FONTS, SIZES} from '../../../assets';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { logout } from '../firebase/api';
-import Login from './Login';
+import { logout } from '../../firebase/api';
+import Login from '../Login';
 import { useNavigation } from '@react-navigation/native';
+import LineDivider from '../../components/LineDivider';
 
-const LineDivider = () => {
-  return (
-    <View
-      style={{
-        width: '100%',
-        paddingHorizontal: SIZES.padding,
-        paddingVertical: 8,
-      }}>
-      <View
-        style={{
-          flex: 1,
-          borderBottomColor: COLORS.lightGray3,
-          borderBottomWidth: 1,
-        }}></View>
-    </View>
-  );
-};
-export default function Setting() {
+export default function SettingUser() {
   const navigation = useNavigation()
   return (
     <View style={{flex: 1, marginTop: 20}}>
@@ -35,16 +19,16 @@ export default function Setting() {
         }}>
         <Text
           style={{
-            // ...FONTS.h2,
+            ...FONTS.h2,
             color: COLORS.black,
             alignItems: 'center',
             fontWeight: 'bold',
           }}>
-          CỬA HÀNG SÁCH
+          TÀI KHOẢN
         </Text>
       </View>
       <LineDivider />
-      <TouchableOpacity
+      {/* <TouchableOpacity
         style={{
           paddingLeft: SIZES.padding,
           paddingBottom: SIZES.radius,
@@ -52,7 +36,7 @@ export default function Setting() {
           alignItems: 'center',
         }}
         onPress={() => navigation.navigate("Thêm sách")}
-      >
+      > */}
         {/* <Image
                     source={icons.bookmark_icon}
                     resizeMode="contain"
@@ -61,16 +45,16 @@ export default function Setting() {
                         height: 30
                     }}
                 /> */}
-        <Text
+        {/* <Text
           style={{
-            // ...FONTS.body2,
+            ...FONTS.body2,
             color: COLORS.black,
             marginLeft: SIZES.radius,
           }}>
           Thêm sách 
         </Text>
       </TouchableOpacity>
-      <LineDivider />
+      <LineDivider /> */}
       <TouchableOpacity
         style={{
           paddingLeft: SIZES.padding,
@@ -78,7 +62,7 @@ export default function Setting() {
           flexDirection: 'row',
           alignItems: 'center',
         }}
-        onPress={() => navigation.navigate("Thêm thể loại")}
+        onPress={() => navigation.navigate("Theo dõi đơn")}
       >
         {/* <Image
                     source={icons.bookmark_icon}
@@ -90,11 +74,11 @@ export default function Setting() {
                 /> */}
         <Text
           style={{
-            // ...FONTS.body2,
+            ...FONTS.body2,
             color: COLORS.black,
             marginLeft: SIZES.radius,
           }}>
-          Thêm thể loại 
+          Theo dõi đơn hàng 
         </Text>
       </TouchableOpacity>
       <LineDivider />
@@ -106,7 +90,7 @@ export default function Setting() {
           flexDirection: 'row',
           alignItems: 'center',
         }}
-        onPress={() => navigation.navigate('Thông tin cửa hàng')}>
+        onPress={() => navigation.navigate('Thông tin cá nhân')}>
         {/* <Image
                     source={require('../../../assets/icons/info_icon.png')}
                     resizeMode="contain"
@@ -117,11 +101,11 @@ export default function Setting() {
                 /> */}
         <Text
           style={{
-            // ...FONTS.body2,
+            ...FONTS.body2,
             color: COLORS.black,
             marginLeft: SIZES.radius,
           }}>
-          Thông tin về cửa hàng
+          Thông tin cá nhân
         </Text>
       </TouchableOpacity>
       <LineDivider />
@@ -131,7 +115,8 @@ export default function Setting() {
           paddingBottom: SIZES.radius,
           flexDirection: 'row',
           alignItems: 'center',
-        }}>
+        }}
+        onPress={() => navigation.navigate('Thông tin cửa hàng')}>
         {/* <Image
                     source={icons.privacy_icon}
                     resizeMode="contain"
@@ -142,11 +127,11 @@ export default function Setting() {
                 /> */}
         <Text
           style={{
-            // ...FONTS.body2,
+            ...FONTS.body2,
             color: COLORS.black,
             marginLeft: SIZES.radius,
           }}>
-          Chính sách và bảo mật
+          Thông tin cửa hàng
         </Text>
       </TouchableOpacity>
       <LineDivider />
@@ -159,7 +144,7 @@ export default function Setting() {
         }}
         onPress={() => {
           logout();
-          // navigation.goBack('Login');
+          // navigation.navigate('Login');
         }}>
         {/* <Image
                     source={icons.logout_icon}
@@ -171,14 +156,13 @@ export default function Setting() {
                 /> */}
         <Text
           style={{
-            // ...FONTS.body2,
+            ...FONTS.body2,
             color: COLORS.black,
             marginLeft: SIZES.radius,
           }}>
           Đăng xuất
         </Text>
       </TouchableOpacity>
-
       <LineDivider />
     </View>
   );

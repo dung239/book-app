@@ -11,11 +11,11 @@ import {
   SafeAreaView,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
-import {COLORS, FONTS, icons} from '../../assets';
-import FormInput from '../components/FormInput';
-import FormButton from '../components/FormButton';
+import {COLORS, FONTS, icons} from '../../../assets';
+import FormInput from '../../components/FormInput';
+import FormButton from '../../components/FormButton';
 import auth, {firebase} from '@react-native-firebase/auth';
-import db from '../firebase/firebase';
+import db from '../../firebase/firebase';
 import {useNavigation} from '@react-navigation/native';
 import ImageCropPicker from 'react-native-image-crop-picker';
 import storage from '@react-native-firebase/storage';
@@ -36,14 +36,18 @@ export default function AddBook() {
   const [categories, setCategories] = useState([]);
   const [categories1, setCategories1] = useState([]);
 
+  // Thêm sách
   const handleSubmit = async () => {
+    if (!name || !author || !category || !image || !pages || !importprice || !price || !amount) {
+      Alert.alert('Cảnh báo', 'Vui lòng nhập đầy đủ thông tin.', [
+        {text: 'Đồng ý', onPress: () => console.log('OK Pressed')},
+      ]);
+    } else {
     const uid = auth().currentUser.uid;
     const imageUrl = await uploadImage();
     const time = firebase.firestore.FieldValue.serverTimestamp();
     db.collection('Book')
       .add({
-        // id: db.collection('Book').doc().id,
-        idStore: uid,
         bookname: name,
         author: author,
         categoryId: category,
@@ -53,6 +57,7 @@ export default function AddBook() {
         amount: amount,
         image: imageUrl,
         createAt: time,
+        content: content
       })
       .then(Alert.alert('Thông báo', 'Sách được thêm thành công'));
     setAmount(null);
@@ -62,6 +67,8 @@ export default function AddBook() {
     setAuthor(null);
     setCategory(null);
     setPages(null);
+    setContent(null);
+    }
   };
 
   const choosePhotoFromLibrary = () => {
@@ -124,13 +131,6 @@ export default function AddBook() {
     }
   };
 
-  // const handleSubmit = () => {
-  //   console.log(categories);
-  //   console.log(categories1);
-  //   console.log(categories1.value);
-  //   console.log(category);
-  // }
-
 
   useEffect(() => { 
     getCategory() 
@@ -138,7 +138,6 @@ export default function AddBook() {
   
   const  getCategory = async () => {
     await db.collection('Category')
-      .where('idStore', '==', auth().currentUser.uid)
       .get()
       .then(querySnapshot => {
         querySnapshot.forEach(documentSnapshot => {
@@ -159,19 +158,14 @@ export default function AddBook() {
   }
 
   return (
-    // <KeyboardAvoidingView
-    //   style={{
-    //     flex: 1,
-    //     padding: 20,
-    //     backgroundColor: COLORS.white,
-    //   }}>
+
     <SafeAreaView
     style={{
           flex: 1,
           padding: 20,
           backgroundColor: COLORS.white,
         }}>
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
         {image != null ? (
           <Image
             source={{uri: image}}
@@ -202,6 +196,14 @@ export default function AddBook() {
           value={author}
         />
 
+        <FormInput
+          labelText="Mô tả"
+          placeholderText="Nhập mô tả"
+          onChangeText={value => setContent(value)}
+          value={content}
+          multiline={true}
+        />
+
         <SelectList
           onSelect={() => console.log(category)}
           data={categories1}
@@ -214,24 +216,28 @@ export default function AddBook() {
           placeholderText="Nhập số trang của sách"
           onChangeText={value => setPages(value)}
           value={pages}
+          keyboardType={'numeric'}
         />
         <FormInput
           labelText="Số lượng"
           placeholderText="Số lượng nhập"
           onChangeText={value => setAmount(value)}
           value={amount}
+          keyboardType={'numeric'}
         />
         <FormInput
           labelText="Giá nhập"
           placeholderText="Nhập giá nhập"
           onChangeText={value => setImportprice(value)}
           value={importprice}
+          keyboardType={'numeric'}
         />
         <FormInput
           labelText="Giá bán"
           placeholderText="Nhập giá bán"
           onChangeText={value => setPrice(value)}
           value={price}
+          keyboardType={'numeric'}
         />
 
         <FormButton

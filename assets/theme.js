@@ -8,7 +8,7 @@ export const COLORS = {
   success: '#00C851',
   error: '#ff4444',
 
-  // black: "#1E1B26",
+  black1: "#363636",
   black: '#000000',
   white: '#FFFFFF',
   orange: '#f86d36',

@@ -12,6 +12,9 @@ export default function BookItem({
   price,
   image,
   id,
+  importprice,
+  content,
+  createAt
 }) {
   const [amount1, setAmount1] = useState('');
   const navigation = useNavigation();
@@ -35,74 +38,64 @@ export default function BookItem({
           style={{width: 100, height: 150, borderRadius: 10}}
         />
         <View style={{flex: 1, marginLeft: SIZES.radius}}>
-          <View>
-            <Text
-              style={{
-                paddingRight: SIZES.padding,
-                ...FONTS.h3,
-                color: COLORS.black,
-              }}>
-              {name}
-            </Text>
-            <Text
-              style={{
-                ...FONTS.h4,
-                color: COLORS.lightGray,
-                marginTop: SIZES.base,
-              }}>
-              {author}
-            </Text>
-          </View>
-
-          <Text
-            style={{
-              ...FONTS.body4,
-              color: COLORS.orange,
-              marginVertical: SIZES.base,
-            }}>
-            {category}
-          </Text>
-          <View>
-            <Text style={{...FONTS.body4, color: COLORS.black}}>
-              {pages} trang
-            </Text>
-          </View>
-        </View>
-        <View>
-          {/* <TouchableOpacity style={{flexDirection: 'row', marginBottom: 10}}
-          onPress={updatehandle}>
-            <Image source={icons.plus_icon}
-            style={{width: 15, height: 15}}></Image>
-            <Text>Nhập thêm</Text>
-          </TouchableOpacity> */}
           <TouchableOpacity
             onPress={() =>
               navigation.navigate({
-                name: 'Hóa đơn',
+                name: 'Thông tin sách',
                 params: {
                   bookid: id,
                   bookname: name,
                   price: price,
-                  amount1: amount1,
                   amount: amount,
+                  image: image,
+                  author: author,
+                  page: pages,
+                  category: category,
+                  importprice: importprice,
+                  content: content,
+                  time: createAt
                 },
               })
             }>
-            <Text>Lập hóa đơn</Text>
+            <View>
+              <Text
+                style={{
+                  paddingRight: SIZES.padding,
+                  ...FONTS.h3,
+                  color: COLORS.black,
+                }}>
+                {name}
+              </Text>
+              <Text
+                style={{
+                  ...FONTS.h4,
+                  color: COLORS.lightGray,
+                  marginTop: SIZES.base,
+                }}>
+                {author}
+              </Text>
+            </View>
+
+            <Text
+              style={{
+                ...FONTS.body4,
+                color: COLORS.orange,
+                marginVertical: SIZES.base,
+              }}>
+              {/* {category} */}
+            </Text>
+            <View>
+              <Text style={{...FONTS.body4, color: COLORS.black}}>
+                {pages} trang
+              </Text>
+            </View>
           </TouchableOpacity>
-          <Text style={{marginRight: 40, marginBottom: 10, marginTop: 40}}>
+        </View>
+        <View>
+          <Text style={{marginRight: 40, marginBottom: 10}}>
             Số lượng: {amount}
           </Text>
-          <Text style={{marginRight: 40}}>Giá: {price} đ</Text>
-          <View style={{flexDirection: 'row', marginTop: 10}}>
-            <Text style={{marginTop: 3}}>Khách mua: </Text>
-            <TextInput
-              style={{padding: 0}}
-              placeholder="...."
-              value={amount1}
-              onChangeText={text => setAmount1(text)}
-              keyboardType={'numeric'}></TextInput>
-          </View>
+          <Text style={{marginRight: 40, marginTop: 10}}>Giá: {price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')} đ</Text>
         </View>
       </View>
     </View>
