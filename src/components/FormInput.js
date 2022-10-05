@@ -18,14 +18,14 @@ const FormInput = ({
           borderColor: COLORS.black + '20',
           borderWidth: 1,
           width: '100%',
-          borderRadius: 5,
+          borderRadius: 50,
           marginTop: 5,
           paddingLeft:10,
         }}
         placeholder={placeholderText}
         onChangeText={onChangeText}
         value={value}
-        
+
         {...more}
       />
     </View>

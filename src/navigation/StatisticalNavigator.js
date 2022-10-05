@@ -1,7 +1,7 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 import {createNativeStackNavigator} from '@react-navigation/native-stack'
-import Statistical from '../screens/Statistical'
+import Statistical from '../screens/adminScreens/Statistical'
 import InvoiceDetail from '../screens/InvoiceDetail'
 
 const StackStatistical = createNativeStackNavigator()

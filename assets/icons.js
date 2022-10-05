@@ -7,6 +7,13 @@ export const plus_icon = require("../assets/icons/plus_icon.png")
 export const chevron_up_icon = require("../assets/icons/chevron_up_icon.png")
 export const chevron_down_icon = require("../assets/icons/chevron_down_icon.png")
 export const reload_icon = require("../assets/icons/reload_icon.png")
+export const delete_icon = require("../assets/icons/delete_icon.png")
+export const cart_icon = require("../assets/icons/cart_icon.png")
+export const cart1_icon = require("../assets/icons/cart1_icon.png")
+export const category_icon = require("../assets/icons/category_icon.png")
+export const arrow_icon = require("../assets/icons/arrow_icon.png")
+export const minus_icon = require("../assets/icons/minus_icon.png")
+export const user_icon = require("../assets/icons/user_icon.png")
 
 
 export default {
@@ -18,5 +25,12 @@ export default {
     plus_icon,
     chevron_up_icon,
     chevron_down_icon,
-    reload_icon
+    reload_icon,
+    delete_icon,
+    cart_icon,
+    cart1_icon,
+    category_icon,
+    arrow_icon,
+    minus_icon,
+    user_icon
 }

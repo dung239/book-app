@@ -7,7 +7,7 @@ export default function InvoiceDetail({navigation, route}) {
   return (
     <SafeAreaView>
       <View style={{margin: 20}}>
-        <View>
+        {/* <View>
           <Text style={{...FONTS.body2}}>
             Khách hàng: {route.params.customer}
           </Text>
@@ -16,7 +16,7 @@ export default function InvoiceDetail({navigation, route}) {
           <Text style={{...FONTS.body2}}>
             Số điện thoại: {route.params.phone}
           </Text>
-        </View>
+        </View> */}
         <View>
           <Text style={{...FONTS.body2}}>Thời gian: {route.params.time}</Text>
         </View>

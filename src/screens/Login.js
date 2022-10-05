@@ -15,7 +15,7 @@ import FormButton from '../components/FormButton';
 import db from '../firebase/firebase';
 import {useStore} from '../store/useStore';
 import {useNavigation} from '@react-navigation/native';
-import MainNavigator from '../navigation/MainNavigator';
+import MainAdminNavigator from '../navigation/MainAdminNavigator';
 import auth from '@react-native-firebase/auth';
 import {login, StoreContext} from '../firebase/api';
 import { images } from '../../assets';
@@ -32,7 +32,7 @@ export default function Login() {
   // useEffect(() => {
   //   const unsubscribe = auth.onAuthStateChanged(user => {
   //     if (user) {
-  //       navigation.navigate('MainNavigator');
+  //       navigation.navigate('MainAdminNavigator');
   //     }
   //   });
   //   return unsubscribe;
@@ -47,15 +47,6 @@ export default function Login() {
       ]);
     } else {
      await login(email, password);
-      // if (loginRes && loginRes != 'error') {
-      //   // console.log(userId);
-      //   navigation.navigate('MainNavigator'); 
-      // } 
-      // if (loginRes && loginRes == error) {
-      //   Alert.alert('Cảnh báo', 'Sai tài khoản hoặc mật khẩu.', [
-      //     {text: 'Đồng ý', onPress: () => console.log('OK Pressed')},
-      //   ]);
-      // }
       setLoading(false);
     }
     setLoading(false);
@@ -76,7 +67,7 @@ export default function Login() {
         padding: 20,
         backgroundColor: COLORS.white,
       }}>
-      <ScrollView >
+      <ScrollView showsVerticalScrollIndicator={false}>
         {/* Header */}
         <Image source={images.booklogin} style={{alignSelf: 'center', width: 180, height: 180}}></Image>
         <Text

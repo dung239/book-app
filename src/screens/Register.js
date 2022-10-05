@@ -23,18 +23,17 @@ const Register = () => {
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
-  const [namestore, setNamestore] = useState('');
   const [loading, setLoading] = useState(false);
   const navigation = useNavigation();
 
   const handleOnSubmit = async () => {
     setLoading(true);
-    if (!email || !password || !name || !phone || !namestore) {
+    if (!email || !password || !name || !phone ) {
       Alert.alert('Cảnh báo', 'Vui lòng nhập đầy đủ thông tin.', [
         {text: 'Đồng ý', onPress: () => console.log('OK Pressed')},
       ]);
     } else {
-      await register(email, password, name, phone, namestore);
+      await register(email, password, name, phone);
       // if (resgisterRes == 'true') {
       //   // () => {
       //   //   db.collection('User').doc(auth().currentUser.uid).add({
@@ -44,15 +43,11 @@ const Register = () => {
       //   //     namestore: namestore,
       //   //   });
       //   // };
-      //   Alert.alert('Đăng ký thành công', 'Vui lòng trở lại trang đăng nhập.', [
-      //     {text: 'Đồng ý', onPress: () => navigation.navigate('Login')},
-      //   ]);
-      // } else {
-      //   Alert.alert('Đăng ký thất bại', 'Email đã tồn tại.', [
-      //     {text: 'Đồng ý', onPress: () => console.log('error')},
-      //   ]);
-      // }
-    }
+        Alert.alert('Đăng ký thành công', 'Vui lòng trở lại trang đăng nhập.', [
+          {text: 'Đồng ý', onPress: () => navigation.navigate('Login')},
+        ]);
+      }
+    
     setLoading(false);
   };
 
@@ -65,7 +60,7 @@ const Register = () => {
   }
 
   return (
-    <KeyboardAvoidingView
+    <SafeAreaView
       style={{
         flex: 1,
         padding: 20,
@@ -96,13 +91,6 @@ const Register = () => {
           onChangeText={value => setPhone(value)}
           value={phone}
           keyboardType={'numeric'}
-        />
-
-        <FormInput
-          labelText="Tên cửa hàng"
-          placeholderText="NHập tên cửa hàng"
-          onChangeText={value => setNamestore(value)}
-          value={namestore}
         />
 
         {/* Email */}
@@ -141,7 +129,7 @@ const Register = () => {
           </Text>
         </View>
       </ScrollView>
-    </KeyboardAvoidingView>
+    </SafeAreaView>
   );
 };
 
