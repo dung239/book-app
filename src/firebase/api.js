@@ -35,7 +35,6 @@ export const register = async (email, password, name, phone) => {
     Alert.alert('Đăng ký thất bại', '', [
       {text: 'Đồng ý', onPress: () => console.log('error')},
     ]);
-    console.log(e);
   }
 };
 

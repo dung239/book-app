@@ -49,7 +49,6 @@ export default function Home({navigation}) {
               key: documentSnapshot.id,
               category: category,
             });
-            console.log(listBook);
           });
           setBook(listBook);
           setFillterBook(listBook);
@@ -106,8 +105,6 @@ export default function Home({navigation}) {
       return contain(book, categoryId)
     })
     setBook(categoryData)
-    console.log(categoryData);
-    console.log(categoryId);
   };
 
   const contain = ({categoryId}) => {

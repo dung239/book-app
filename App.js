@@ -8,6 +8,8 @@ import {
   Text,
   TouchableOpacity,
   View,
+  TextInput,
+  TouchableHighlight
 } from 'react-native';
 import auth from '@react-native-firebase/auth';
 import {StoreContext, useStore} from './src/store/useStore';
@@ -19,6 +21,7 @@ import db from './src/firebase/firebase';
 import ItemBook from './src/components/ItemBook';
 import firebase from '@react-native-firebase/auth';
 import {LogBox} from 'react-native';
+import Test from './src/screens/Test';
 LogBox.ignoreLogs(['EventEmitter.removeListener']);
 LogBox.ignoreLogs(['Require cycle:']);
 LogBox.ignoreLogs(['Warning:']);

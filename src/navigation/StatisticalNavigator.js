@@ -13,7 +13,7 @@ export default function StatisticalNavigator() {
       screenOptions={{headerShown: true}}
       >
       <StackStatistical.Screen name="Statistical" component={Statistical} options={{headerShown: false}}/>
-      <StackStatistical.Screen name="Invoice Detail" component={InvoiceDetail} />
+      <StackStatistical.Screen name="Chi tiết hóa đơn" component={InvoiceDetail} />
     </StackStatistical.Navigator>
   )
 }

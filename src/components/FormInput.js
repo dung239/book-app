@@ -9,6 +9,8 @@ const FormInput = ({
   value = null,
   ...more
 }) => {
+
+
   return (
     <View style={{width: '100%', marginBottom: 10}}>
       <Text>{labelText}</Text>
@@ -25,7 +27,6 @@ const FormInput = ({
         placeholder={placeholderText}
         onChangeText={onChangeText}
         value={value}
-
         {...more}
       />
     </View>

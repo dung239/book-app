@@ -20,8 +20,6 @@ const SettingUserNavigation = () => {
       <StackSetting.Screen name='Thông tin đơn' component={InvoiceProfile} />
       <StackSetting.Screen name='Thông tin cá nhân' component={Profile} />
       <StackSetting.Screen name='Thông tin cửa hàng' component={StoreInfo} />
-
-
     </StackSetting.Navigator>
   );
 };

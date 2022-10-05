@@ -235,9 +235,8 @@ export default function Statistical({navigation}) {
                           borderRadius: 10,
                         }}
                         onPress={() =>
-                          navigation.navigate('Invoice Detail', {
-                            customer: item.customer,
-                            phone: item.phone,
+                          navigation.navigate('Chi tiết hóa đơn', {
+                            customer: item.user,
                             time: item.dateTime,
                             total: item.total,
                             invoice: item.invoice,
@@ -319,9 +318,8 @@ export default function Statistical({navigation}) {
                           borderRadius: 10,
                         }}
                         onPress={() =>
-                          navigation.navigate('Invoice Detail', {
-                            customer: item.customer,
-                            phone: item.phone,
+                          navigation.navigate('Chi tiết hóa đơn', {
+                            customer: item.user,
                             time: item.dateTime,
                             total: item.total,
                             invoice: item.invoice,
@@ -403,9 +401,8 @@ export default function Statistical({navigation}) {
                           borderRadius: 10,
                         }}
                         onPress={() =>
-                          navigation.navigate('Invoice Detail', {
-                            customer: item.customer,
-                            phone: item.phone,
+                          navigation.navigate('Chi tiết hóa đơn', {
+                            customer: item.user,
                             time: item.dateTime,
                             total: item.total,
                             invoice: item.invoice,
